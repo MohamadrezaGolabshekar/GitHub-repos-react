@@ -1,0 +1,30 @@
+import React from 'react';
+import { Icon } from 'semantic-ui-react'
+import useAppContext from "../../Store/Store";
+
+/**
+ * this is like component (the heart button in Drawer and repo item)
+ * it handle a click function to dispatch an action to our reducer and handle 
+ * like and dislike repo
+ */
+const Like = ({ isLike = false, repo }) => {
+
+    const [, dispatch] = useAppContext();
+
+    return (
+        <>
+            <Icon
+                name={`heart${!repo.isLiked ? ' outline' : ''}`}
+                size='large'
+                color={!repo.isLiked ? 'black' : 'red'}
+                onClick={() => {
+                    dispatch({
+                        type: repo.isLiked ? 'DISLIKE' : 'LIKE',
+                        payload: { id: repo.id }
+                    });
+                }} />
+        </>
+    )
+}
+
+export default Like;
