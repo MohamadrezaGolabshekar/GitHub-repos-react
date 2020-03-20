@@ -17,6 +17,7 @@ const Like = ({ isLike = false, repo }) => {
                 name={`heart${!repo.isLiked ? ' outline' : ''}`}
                 size='large'
                 color={!repo.isLiked ? 'black' : 'red'}
+                style={{cursor: 'pointer'}}
                 onClick={() => {
                     dispatch({
                         type: repo.isLiked ? 'DISLIKE' : 'LIKE',

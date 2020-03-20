@@ -2,13 +2,17 @@ import {likeAndDislike, checkLiked} from '../utils/reducerUtils';
 
 const initialState: any = {
     originalRepos: [],
-    likedRepos: []
+    likedRepos: [],
+    user: {}
 };
 
 const appReducer = (state = initialState, action: any = {}) => {
     switch (action.type) {
         case "FETCH_REPOS":
             return { ...state, originalRepos: checkLiked(action.payload.repos, state.likedRepos) };
+        case "SET_USER":
+        console.log('action.payload.user :: ', action.payload.user)
+            return { ...state, user: action.payload.user };
         case "LIKE":
             const { cloneOriginalRepos: cloneOrg, cloneLikedRepos: cloneLiked } = likeAndDislike(true, action.payload.id, state.originalRepos, state.likedRepos);
             return { ...state, likedRepos: cloneLiked, originalRepos: cloneOrg };

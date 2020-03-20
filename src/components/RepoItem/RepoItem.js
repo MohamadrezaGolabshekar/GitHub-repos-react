@@ -9,14 +9,20 @@ import Like from '../Like/Like';
  */
 const RepoItem = ({ repo }) => {
     return (
-        <Card>
-            <Card.Content header={repo.name} style={{ wordWrap: "break-word"}}/>
+        <Card onClick={() => null} style={{ cursor: "default" }}>
+            <Card.Content header={repo.name} style={{ wordWrap: "break-word" }} />
             <Card.Content description={repo.description || "No description"} />
-            <Card.Content extra style={{ display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+            <Card.Content extra>
+                <Icon name='code' />{repo.language || "Language not selected"}
+            </Card.Content>
+            <Card.Content extra style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <div>
-                    <Icon name='code'/>{repo.language || "Language not selected"}
+                    Updated at: {new Date(repo.updated_at).toLocaleDateString()}
                 </div>
-                <Like repo={repo} isLike={repo.isLiked} />
+                <div>
+                    <Icon style={{ cursor: 'pointer' }} size='large' name='eye' onClick={() => console.log(999)} />
+                    <Like repo={repo} isLike={repo.isLiked} />
+                </div>
             </Card.Content>
         </Card>
     )

@@ -89,7 +89,7 @@ const RepoContainer = () => {
                         <RepoContainerWrapper>
                             <SearchInput onSearch={onSearch} />
                             <br />
-                            {searchValue && <OwnerCard userName={searchValue} />}
+                            <OwnerCard userName={searchValue} />
 
                             {
                                 originalRepos && originalRepos.length ?
