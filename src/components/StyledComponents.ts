@@ -39,8 +39,8 @@ export const RepoContainerWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center
-`
+    justify-content: center;
+`;
 
 export const ItemImg = styled.div`
     width: ${({ width }: IItemImg) => width || '290px'};
@@ -107,4 +107,19 @@ export const Message = styled.p`
     font-size: 18px;
     padding: 10px;
     color: ${({color}: IColor) => color || '#0b4f90'};
+`;
+
+export const ReadMeSection = styled.section`
+    width: 80%;
+    margin: 40px auto;
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    padding: 30px;
+    *{
+        max-width:100%
+    }
+
+    /* @media(max-width: 768px) {
+        padding: 40px 0;
+    } */
 `;

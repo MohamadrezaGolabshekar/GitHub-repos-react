@@ -12,6 +12,7 @@ import {
 import { AppContext } from "./Store/Store";
 import { appReducer, initialState } from "./Reducer/Reducer";
 import SavedReposContainer from "./container/SavedReposContainer";
+import ReadMeContainer from "./container/ReadMeContainer"
 
 function App() {
 
@@ -32,6 +33,9 @@ function App() {
         <Switch>
           <Route path="/saved-repos">
             <SavedReposContainer />
+          </Route>
+          <Route path="/readme/:owner/:repo">
+            <ReadMeContainer/>
           </Route>
           <Route path="/">
             <RepoContainer />

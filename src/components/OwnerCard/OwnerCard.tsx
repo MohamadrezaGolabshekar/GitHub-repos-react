@@ -37,7 +37,6 @@ const OwnerCard: FC<IProp> = ({ userName }: IProp) => {
     }
 
     useEffect(() => {
-        
         if (userName) {
             fetchData(userName);
         }

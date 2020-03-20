@@ -13,7 +13,9 @@ const Nav = () => {
     }
 
     useEffect(() => {
-        setActiveItem(window.location.pathname === '/' ? 'home' : 'saved-repos');
+        console.log(window.location.pathname)
+        setActiveItem(window.location.pathname === '/' ? 
+            'home' : window.location.pathname === '/saved-repos' ? 'saved-repos' : '');
     }, [window.location.pathname])
 
     return (

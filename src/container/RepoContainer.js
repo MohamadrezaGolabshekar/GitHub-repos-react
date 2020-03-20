@@ -72,9 +72,10 @@ const RepoContainer = () => {
      * @param string val 
      */
     const onSearch = val => {
-        setActivePage(1);
-        setSearchValue(val);
-        fetchData(val);
+        if (val) {
+            setSearchValue(val);
+            fetchData(val);
+        }
     }
 
     return (
