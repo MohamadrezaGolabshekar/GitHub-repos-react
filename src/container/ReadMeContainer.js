@@ -3,11 +3,6 @@ import axios from 'axios';
 import { Dimmer, Loader } from 'semantic-ui-react'
 import { useParams } from "react-router-dom";
 import { Base64 } from 'js-base64';
-import useAppContext from "../Store/Store";
-import RepoList from '../components/RepoList/RepoList';
-import { RepoContainerWrapper } from '../components/StyledComponents';
-import EmptyList from '../components/UI/EmptyList';
-import { Icon } from 'semantic-ui-react'
 import { getReadMe } from "../utils/getReadMe";
 import ErrorMessage from '../components/UI/ErrorMessage';
 import marked from "marked";
@@ -23,8 +18,7 @@ const ReadMeContainer = () => {
     let { repo, owner } = useParams();
 
     /**
-     * @desc fetch repos data based and pagination data and input search
-     * @param object queryObj - the query object for get repos like {offset : 10} 
+     * @desc fetch repos ReadMe based on selected repo
      */
     const fetchReadMe = async (repoId, userId) => {
         const CancelToken = axios.CancelToken;
@@ -32,7 +26,6 @@ const ReadMeContainer = () => {
         setIsLoading(true);
         try {
             const data = await getReadMe(repoId, userId, source.token);
-            console.log('data : ', data);
             if(data && data.content) {
                 setMarkdown(marked(Base64.decode(data.content)));
             } else {

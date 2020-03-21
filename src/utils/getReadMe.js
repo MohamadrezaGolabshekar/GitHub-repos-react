@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 /**
- * I use this fetch function in main page and to get repository's ReadMe
+ * I use this fetch function to get repository's ReadMe
  * @param {*} api
  * @param {*} cancelToken 
  */

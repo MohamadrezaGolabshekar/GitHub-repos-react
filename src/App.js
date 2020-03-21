@@ -16,8 +16,8 @@ import ReadMeContainer from "./container/ReadMeContainer"
 
 function App() {
 
-  const [state, dispatch]: any = useReducer(appReducer, initialState);
-  const value: any = [state, dispatch];
+  const [state, dispatch] = useReducer(appReducer, initialState);
+  const value = [state, dispatch];
 
   return (
     <AppContext.Provider value={value}>

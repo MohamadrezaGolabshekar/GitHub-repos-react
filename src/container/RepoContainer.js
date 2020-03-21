@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Dimmer, Loader, Pagination } from 'semantic-ui-react'
+import React, { useState } from 'react';
+import { Dimmer, Loader } from 'semantic-ui-react'
 
 import useAppContext from "../Store/Store";
 import { getRepos } from '../utils/getRepos';
@@ -16,17 +16,13 @@ import OwnerCard from '../components/OwnerCard/OwnerCard';
 const RepoContainer = () => {
 
     const [isLoading, setIsLoading] = useState(false);
-    const [total, setTotal] = useState(0);
-    const [activePage, setActivePage] = useState(1);
     const [searchValue, setSearchValue] = useState('');
     const [error, setError] = useState(null);
     const [{ originalRepos }, dispatch] = useAppContext();
-    const limit = 3;
 
 
     /**
-     * @desc fetch repos data based and pagination data and input search
-     * @param object queryObj - the query object for get repos like {offset : 10} 
+     * @desc fetch repos data based on input search
      */
     const fetchData = async (userName) => {
         const CancelToken = axios.CancelToken;
@@ -39,33 +35,12 @@ const RepoContainer = () => {
                 type: 'FETCH_REPOS',
                 payload: { repos: data }
             });
-            setTotal(data.total);
             setIsLoading(false);
         } catch (err) {
             setIsLoading(false);
             setError({ message: err.message, code: err.code });
         }
     }
-
-    // like componentDidMount
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
-
-
-    /**
-     * @desc handle change page in pagination and uses fetchData function
-     * @param {*} e 
-     * @param {*} data 
-     */
-    // const onPageChange = (e, data) => {
-    //     setActivePage(data.activePage);
-    //     const queryObj = { offset: data.activePage * limit - limit };
-    //     if (searchValue) {
-    //         queryObj.nameStartsWith = searchValue;
-    //     }
-    //     fetchData(queryObj);
-    // }
 
     /**
      * @desc handle input search change for onChange searching

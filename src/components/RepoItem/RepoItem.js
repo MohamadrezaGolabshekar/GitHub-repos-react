@@ -1,12 +1,11 @@
 import React from 'react';
 import { Card, Icon } from 'semantic-ui-react'
-import { ItemImg, RepoTitle } from '../StyledComponents';
 import Like from '../Like/Like';
 import { Link } from "react-router-dom";
 import useAppContext from "../../Store/Store";
 /**
  * it is just a placeholder for a repo item data and for it I used 
- * Card component from semantic-ui-react and some other custom component
+ * Card component from semantic-ui-react
  */
 const RepoItem = ({ repo }) => {
     const [{user}] = useAppContext();

@@ -1,12 +1,12 @@
 import {likeAndDislike, checkLiked} from '../utils/reducerUtils';
 
-const initialState: any = {
+const initialState = {
     originalRepos: [],
     likedRepos: [],
     user: {}
 };
 
-const appReducer = (state = initialState, action: any = {}) => {
+const appReducer = (state = initialState, action = {}) => {
     switch (action.type) {
         case "FETCH_REPOS":
             return { ...state, originalRepos: checkLiked(action.payload.repos, state.likedRepos) };

@@ -1,28 +1,18 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react';
-import { ItemImg, RepoTitle } from '../StyledComponents';
 import useAppContext from "../../Store/Store";
-import { IProp } from './interface';
 import axios from 'axios';
 import { getUser } from '../../utils/getUser';
 
+const OwnerCard = ({ userName }) => {
 
-/**
- * it is just a placeholder for a repo item data and for it I used 
- * Card component from semantic-ui-react and some other custom component
- */
+    const [{ user }, dispatch] = useAppContext();
 
-const OwnerCard: FC<IProp> = ({ userName }: IProp) => {
-
-    // const [user, setUser]: any = useState({});
-    const [{ user }, dispatch]: any = useAppContext();
-
-    const fetchData = async (userName: string) => {
+    const fetchData = async (userName) => {
         const CancelToken = axios.CancelToken;
         const source = CancelToken.source();
         try {
             const userData = await getUser(userName, source.token);
-            console.log('userData : ', userData)
             dispatch({
                 type: 'SET_USER',
                 payload: { user: userData }
@@ -31,7 +21,7 @@ const OwnerCard: FC<IProp> = ({ userName }: IProp) => {
             console.log("error in get user data :: ", err);
             dispatch({
                 type: 'SET_USER',
-                payload: {user: {}}
+                payload: { user: {} }
             });
         }
     }
@@ -57,22 +47,20 @@ const OwnerCard: FC<IProp> = ({ userName }: IProp) => {
                             {user.name} {user.location && "is living in"} {user.location}.
                         </Card.Description>
                     </Card.Content>
-                    <Card.Content extra style={{display: "flex", justifyContent: "space-between"}}>
-                        <a>
+                    <Card.Content extra style={{ display: "flex", justifyContent: "space-between" }}>
+                        <span>
                             <Icon name='user outline' />
                             {user.followers} Followers
-                        </a>
-                        <a>
+                        </span>
+                        <span>
                             <Icon name='user outline' />
                             {user.following} following
-                        </a>
+                        </span>
                     </Card.Content>
 
                     <Card.Content extra>
-                        <a>
-                            <Icon name='file code outline' />
-                            {user.public_repos} Public repos
-                        </a>
+                        <Icon name='file code outline' />
+                        {user.public_repos} Public repos
                     </Card.Content>
                 </Card>
             }
