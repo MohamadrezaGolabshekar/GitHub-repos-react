@@ -73,7 +73,7 @@ const RepoContainer = () => {
                             {
                                 originalRepos && originalRepos.length ?
                                     <RepoList repos={originalRepos} /> :
-                                    originalRepos && originalRepos.length === 0 && !isFirstInit ?
+                                    originalRepos && originalRepos.length === 0 && !isFirstInit && !isLoading ?
                                         <EmptyList title='Empty list' message='There is no repo with this search :(' /> :
                                         null
                             }
