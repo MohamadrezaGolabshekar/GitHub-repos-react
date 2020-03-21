@@ -3,7 +3,8 @@ import {likeAndDislike, checkLiked} from '../utils/reducerUtils';
 const initialState = {
     originalRepos: [],
     likedRepos: [],
-    user: {}
+    user: {},
+    isFirstInit: true
 };
 
 const appReducer = (state = initialState, action = {}) => {
@@ -19,6 +20,8 @@ const appReducer = (state = initialState, action = {}) => {
         case "DISLIKE":
             const { cloneOriginalRepos: cloneOrgDislike, cloneLikedRepos: cloneLikedDislike } = likeAndDislike(false, action.payload.id, state.originalRepos, state.likedRepos);
             return { ...state, likedRepos: cloneLikedDislike, originalRepos: cloneOrgDislike };
+        case "REMOVE_FIRST_INIT_MODE":
+            return { ...state, isFirstInit: false };
         default:
             return state;
     }

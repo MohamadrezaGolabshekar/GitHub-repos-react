@@ -18,7 +18,7 @@ const RepoContainer = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [error, setError] = useState(null);
-    const [{ originalRepos }, dispatch] = useAppContext();
+    const [{ originalRepos, isFirstInit }, dispatch] = useAppContext();
 
 
     /**
@@ -47,6 +47,9 @@ const RepoContainer = () => {
      * @param string val 
      */
     const onSearch = val => {
+        if(isFirstInit) {
+            dispatch({type: 'REMOVE_FIRST_INIT_MODE'})
+        }
         if (val) {
             setSearchValue(val);
             fetchData(val);
@@ -62,17 +65,15 @@ const RepoContainer = () => {
                         <Dimmer active={isLoading} inverted>
                             <Loader inverted size='large'>Getting Repos</Loader>
                         </Dimmer>
-                        <RepoContainerWrapper>
+                        <RepoContainerWrapper isFirstInit={isFirstInit}>
                             <SearchInput onSearch={onSearch} />
                             <br />
                             <OwnerCard userName={searchValue} />
 
                             {
                                 originalRepos && originalRepos.length ?
-                                    <>
-                                        <RepoList repos={originalRepos} />
-                                    </> :
-                                    originalRepos && originalRepos.length === 0 ?
+                                    <RepoList repos={originalRepos} /> :
+                                    originalRepos && originalRepos.length === 0 && !isFirstInit ?
                                         <EmptyList title='Empty list' message='There is no repo with this search :(' /> :
                                         null
                             }

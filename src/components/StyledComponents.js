@@ -24,7 +24,8 @@ export const Title = styled.h1`
     }
 `;
 
-export const RepoContainerWrapper = styled.div`
+export const RepoContainerWrapper = styled.section`
+    height: ${({isFirstInit}) => isFirstInit ? "calc(100vh - 150px)" : "auto"};
     padding: 60px 0;
     display: flex;
     flex-direction: column;
